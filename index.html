@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Timecode Productions</title>
+    <link rel="stylesheet" href="styles.css">
+    <!-- Font Awesome for hamburger icon -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="camera-texture-bg">
+        <!-- Navigation -->
+        <header>
+            <div class="logo-container">
+                <img src="/images/logo3.png" alt="Timecode Productions Logo" class="logo">
+                <!-- The icon logo will be added via JavaScript -->
+            </div>
+            <nav>
+                <div class="hamburger-menu">
+                    <i class="fas fa-bars"></i>
+                </div>
+                <!-- Hidden menu that will be shown when hamburger is clicked -->
+                <div class="menu-items">
+                    <!-- Menu items will be populated via JavaScript -->
+                </div>
+            </nav>
+        </header>
+
+        <!-- Main content -->
+        <main>
+
+            <!-- Company description section -->
+            <section class="company-description">
+                <p>Timecode Productions is a Canadian production company based in the Greater Toronto Area specializing in exceptional visual storytelling.</p>
+                <p>From intimate family gatherings to large corporate events, training videos to personal portraits, our passion is transforming every moment into something visually spectacular.</p>
+            </section>
+
+            <div class="video-grid">
+                <!-- Video item 1 - About -->
+                <div class="video-container">
+                    <video class="video-thumbnail" poster="" muted loop>
+                        <source src="/videos/about.mp4" type="video/mp4">
+                    </video>
+                    <div class="video-overlay">
+                        <div class="video-title">About</div>
+                    </div>
+                </div>
+
+                <!-- Video item 2 - Contact -->
+                <div class="video-container">
+                    <video class="video-thumbnail" poster="" muted loop>
+                        <source src="/videos/contact.mp4" type="video/mp4">
+                    </video>
+                    <div class="video-overlay">
+                        <div class="video-title">Contact</div>
+                    </div>
+                </div>
+
+                <!-- Video item 3 - Home -->
+                <div class="video-container">
+                    <video class="video-thumbnail" poster="" muted loop>
+                        <source src="/videos/home.mp4" type="video/mp4">
+                    </video>
+                    <div class="video-overlay">
+                        <div class="video-title">Home</div>
+                    </div>
+                </div>
+
+                <!-- Video item 4 - Pricing -->
+                <div class="video-container">
+                    <video class="video-thumbnail" poster="" muted loop>
+                        <source src="/videos/pricing.mp4" type="video/mp4">
+                    </video>
+                    <div class="video-overlay">
+                        <div class="video-title">Pricing</div>
+                    </div>
+                </div>
+
+                <!-- Video item 5 - Work -->
+                <div class="video-container">
+                    <video class="video-thumbnail" poster="" muted loop>
+                        <source src="/videos/work.mp4" type="video/mp4">
+                    </video>
+                    <div class="video-overlay">
+                        <div class="video-title">Work</div>
+                    </div>
+                </div>
+
+                <!-- Video item 6 - Empty slot for future content -->
+                <div class="video-container empty">
+                    <!-- Placeholder for future content -->
+                    <div class="placeholder">
+                        <div class="placeholder-text">Coming Soon</div>
+                    </div>
+                </div>
+            </div>
+        
+        </main>
+
+        <!-- Footer -->
+        <footer>
+            <div class="copyright">
+                &copy; 2025 Timecode Productions. All Rights Reserved.
+            </div>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
