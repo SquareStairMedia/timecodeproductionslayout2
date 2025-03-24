@@ -1,4 +1,38 @@
 document.addEventListener('DOMContentLoaded', function() {
+    const preloader = document.getElementById('preloader');
+    const contentContainer = document.querySelector('.camera-texture-bg');
+    
+    // Add the content-container class to your main content
+    contentContainer.classList.add('content-container');
+    
+    // Preload the background image
+    const bgImage = new Image();
+    bgImage.src = 'images/leatherBackground.jpg';
+    
+    // Function to hide preloader and show content
+    function showContent() {
+      preloader.classList.add('preloader-hidden');
+      contentContainer.classList.add('content-visible');
+      
+      // Remove the preloader from the DOM after transition
+      setTimeout(() => {
+        preloader.remove();
+      }, 500);
+    }
+    
+    // If image is already cached or loads quickly
+    if (bgImage.complete) {
+      showContent();
+    } else {
+      // Wait for image to load
+      bgImage.onload = showContent;
+      
+      // Fallback in case of loading error or timeout
+      setTimeout(showContent, 2000);
+    }
+  });
+
+document.addEventListener('DOMContentLoaded', function() {
     // Logo transition on scroll
     const header = document.querySelector('header');
     const logoContainer = document.querySelector('.logo-container');
