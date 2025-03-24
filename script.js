@@ -7,7 +7,7 @@ document.addEventListener('DOMContentLoaded', function() {
     let iconLogo = document.querySelector('.icon-logo');
     if (!iconLogo) {
         iconLogo = document.createElement('img');
-        iconLogo.src = '/images/icon.png';
+        iconLogo.src = 'images/icon.png';
         iconLogo.alt = 'Timecode Productions Icon';
         iconLogo.className = 'icon-logo';
         logoContainer.appendChild(iconLogo);
