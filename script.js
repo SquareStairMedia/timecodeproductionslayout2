@@ -187,3 +187,90 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 });
+
+// Ambient backlight effect on Video Thumbnails
+
+document.addEventListener('DOMContentLoaded', function() {
+    // Get all non-empty video containers
+    const videoContainers = document.querySelectorAll('.video-container:not(.empty)');
+    
+    videoContainers.forEach(container => {
+        const video = container.querySelector('video');
+        
+        // Create a canvas for color analysis
+        const colorAnalysisCanvas = document.createElement('canvas');
+        const colorContext = colorAnalysisCanvas.getContext('2d', { willReadFrequently: true });
+        
+        // Create the ambient light element
+        const ambientLight = document.createElement('div');
+        ambientLight.className = 'ambient-light';
+        container.appendChild(ambientLight);
+        
+        // Set initial state
+        ambientLight.style.opacity = '0';
+        
+        // Function to analyze video frame and set ambient light color
+        function updateAmbientLight() {
+            if (video.paused || !video.videoWidth) return;
+            
+            // Set canvas dimensions to match video
+            colorAnalysisCanvas.width = video.videoWidth;
+            colorAnalysisCanvas.height = video.videoHeight;
+            
+            // Draw current video frame to canvas
+            colorContext.drawImage(video, 0, 0, colorAnalysisCanvas.width, colorAnalysisCanvas.height);
+            
+            // Sample colors from different regions of the frame
+            // We'll sample from the edges where the ambient light effect would be most noticeable
+            const edgePoints = [
+                {x: 0, y: 0}, // top-left
+                {x: colorAnalysisCanvas.width - 1, y: 0}, // top-right
+                {x: 0, y: colorAnalysisCanvas.height - 1}, // bottom-left
+                {x: colorAnalysisCanvas.width - 1, y: colorAnalysisCanvas.height - 1}, // bottom-right
+                {x: Math.floor(colorAnalysisCanvas.width / 2), y: 0}, // top-center
+                {x: Math.floor(colorAnalysisCanvas.width / 2), y: colorAnalysisCanvas.height - 1}, // bottom-center
+                {x: 0, y: Math.floor(colorAnalysisCanvas.height / 2)}, // left-center
+                {x: colorAnalysisCanvas.width - 1, y: Math.floor(colorAnalysisCanvas.height / 2)}, // right-center
+            ];
+            
+            // Extract colors from each point
+            const colors = edgePoints.map(point => {
+                const pixel = colorContext.getImageData(point.x, point.y, 1, 1).data;
+                return {r: pixel[0], g: pixel[1], b: pixel[2]};
+            });
+            
+            // Calculate average color
+            const averageColor = colors.reduce((acc, color) => {
+                return {
+                    r: acc.r + color.r / colors.length,
+                    g: acc.g + color.g / colors.length,
+                    b: acc.b + color.b / colors.length
+                };
+            }, {r: 0, g: 0, b: 0});
+            
+            // Apply color to ambient light
+            ambientLight.style.boxShadow = `0 0 40px 10px rgba(${Math.round(averageColor.r)}, ${Math.round(averageColor.g)}, ${Math.round(averageColor.b)}, 0.7)`;
+            
+            // Request next frame update
+            if (!video.paused) {
+                requestAnimationFrame(updateAmbientLight);
+            }
+        }
+        
+        // Start analyzing when video plays
+        video.addEventListener('play', function() {
+            ambientLight.style.opacity = '1';
+            updateAmbientLight();
+        });
+        
+        // Stop when video pauses
+        video.addEventListener('pause', function() {
+            ambientLight.style.opacity = '0';
+        });
+        
+        // Clear effect when mouse leaves
+        container.addEventListener('mouseleave', function() {
+            ambientLight.style.opacity = '0';
+        });
+    });
+});
