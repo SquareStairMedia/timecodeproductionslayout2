@@ -249,7 +249,7 @@ document.addEventListener('DOMContentLoaded', function() {
             }, {r: 0, g: 0, b: 0});
             
             // Apply color to ambient light
-            ambientLight.style.boxShadow = `0 0 40px 10px rgba(${Math.round(averageColor.r)}, ${Math.round(averageColor.g)}, ${Math.round(averageColor.b)}, 0.7)`;
+            ambientLight.style.boxShadow = `0 0 80px 10px rgba(${Math.round(averageColor.r)}, ${Math.round(averageColor.g)}, ${Math.round(averageColor.b)}, 0.9)`;
             
             // Request next frame update
             if (!video.paused) {
